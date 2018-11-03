@@ -17,6 +17,7 @@ import com.example.internship.mypersonalcamera.model.RetrofitClientInstance;
 
 import org.json.JSONObject;
 
+import java.nio.file.Path;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,7 +25,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class MainActivity extends Activity {
-
     String authorization_Key = "&apiKey=53VELF-92F346-8HGD75-3IPC";
     double observer_lat = 41.702f;
     double observer_lng = -76.014f;
@@ -44,6 +44,7 @@ public class MainActivity extends Activity {
     ShowCamera showCamera;
     ImageView imageView;
     int delay = 2000;
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,18 +53,30 @@ public class MainActivity extends Activity {
         frameLayout = findViewById(R.id.frame_layout_camera);
         imageView = findViewById(R.id.iv_photo);
 
-        camera = android.hardware.Camera.open();
+        // camera = android.hardware.Camera.open();
         showCamera = new ShowCamera(this, camera);
         frameLayout.addView(showCamera);
 
-        Timer timer = new Timer();
-
-        timer.schedule(new TimerTask() {
+        Thread thread = new Thread() {
             public void run() {
-                aaaaaaa();
+                while (!isInterrupted()) {
+                    try {
+                        Thread.sleep(1000);
 
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                count++;
+                                aaaaaaa();
+                            }
+                        });
+                    } catch (Exception e) {
+                    }
+                }
             }
-        }, delay);
+        };
+
+        thread.start();
     }
 
 
@@ -78,7 +91,6 @@ public class MainActivity extends Activity {
     public void aaaaaaa() {
         final GetDataService date_service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<Response> call = date_service.PostFromURLData(observer_lat, observer_lng, observer_alt, search_radius90, category_id, authorization_Key);
-
         call.enqueue(new Callback<Response>() {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
@@ -119,16 +131,33 @@ public class MainActivity extends Activity {
         });
     }
 
-    public void said(View view) {
-        moveX = ObjectAnimator.ofFloat(imageView, "translationX", (float) Sat_Lat, (float) Sat_Lan);
-        moveY = ObjectAnimator.ofFloat(imageView, "translationY", (float) Sat_Lat, (float) Sat_Lan);
-        // moveX1 = ObjectAnimator.ofFloat(imageView, "translationX", (float) Sat_Lat, (float) -Sat_Lan);
-        // moveY1 = ObjectAnimator.ofFloat(imageView, "translationY", (float) Sat_Lat, (float) -Sat_Lan);
-        AnimatorSet set = new AnimatorSet();
-        set.playTogether(moveX, moveY);
-//        downIt.setDuration(2500);
-//        downIt.setRepeatCount(ValueAnimator.INFINITE);
-//        downIt.setRepeatMode(ValueAnimator.RESTART);
-        set.start();
+    public void said(final View view) {
+
+        float x = view.getX();
+        float y = view.getY();
+        android.graphics.Path path = new android.graphics.Path();
+        path.moveTo(x + 0, y + 0);
+        path.lineTo(x + 100, y + 150);
+        path.lineTo(x + 400, y + 150);
+        path.lineTo(x + 0, y + 0);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
+            objectAnimator.setDuration(3000);
+            objectAnimator.start();
+        }
+
+
+//        ValueAnimator valueAnimatorX=ValueAnimator
+//        moveX = ObjectAnimator.ofFloat(imageView, "translationX", (float) Sat_Lat, (float) Sat_Lan);
+//        moveY = ObjectAnimator.ofFloat(imageView, "translationY", (float) Sat_Lat, (float) Sat_Lan);
+//        // moveX1 = ObjectAnimator.ofFloat(imageView, "translationX", (float) Sat_Lat, (float) -Sat_Lan);
+//        // moveY1 = ObjectAnimator.ofFloat(imageView, "translationY", (float) Sat_Lat, (float) -Sat_Lan);
+//        AnimatorSet set = new AnimatorSet();
+//        set.playTogether(moveX, moveY);
+////        downIt.setDuration(2500);
+////        downIt.setRepeatCount(ValueAnimator.INFINITE);
+////        downIt.setRepeatMode(ValueAnimator.RESTART);
+//        set.start();
     }
 }
