@@ -5,28 +5,34 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:id="@+id/frame_layout_camera"
+    <!--<FrameLayout-->
+        <!--android:id="@+id/frame_layout_camera"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_alignParentTop="true">-->
+
+
+    <!--</FrameLayout>-->
+
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="#00000000">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_photo"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:onClick="said"-->
+            <!--android:src="@color/colorPrimary"-->
+            <!--android:visibility="visible"-->
+            <!--tools:srcCompat="@tools:sample/backgrounds/scenic"-->
+            <!--tools:ignore="OnClick" />-->
+    <!--</FrameLayout>-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/_rv_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true">
-
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#00000000">
-
-        <ImageView
-            android:id="@+id/iv_photo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:onClick="said"
-            android:src="@color/colorPrimary"
-            android:visibility="visible"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
-    </FrameLayout>
+        android:layout_centerInParent="true" />
 </RelativeLayout>
