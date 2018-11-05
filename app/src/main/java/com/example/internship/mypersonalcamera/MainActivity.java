@@ -1,13 +1,24 @@
 package com.example.internship.mypersonalcamera;
 
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Path;
 import android.hardware.camera2.CameraManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.animation.DynamicAnimation;
+import android.support.animation.FlingAnimation;
+import android.support.animation.SpringAnimation;
+import android.support.animation.SpringForce;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -27,26 +38,26 @@ import java.util.jar.Attributes;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements View.OnClickListener {
     String authorization_Key = "&apiKey=53VELF-92F346-8HGD75-3IPC";
     double observer_lat = 41.702f;
     double observer_lng = -76.014f;
     double observer_alt = 0;
     int search_radius90 = 90;
-    int category_id = 18;
+    int category_id = 15;
     private AdapterClass adapter;
     ArrayList<Above> aboveList = new ArrayList<>();
     RecyclerView recyclerView;
 
-//    int[] ID;
-//    String[] NAME;
-//    String[] INT_DESIGNATOR;
-//    String[] LAUNCH_DATE;
-//    Double[] SAT_LAT;
-//    Double[] SAT_LNG;
-//    Double[] SAT_ALT;
-//    ObjectAnimator moveX;
-//    ObjectAnimator moveY;
+    int[] ID;
+    String[] NAME;
+    String[] INT_DESIGNATOR;
+    String[] LAUNCH_DATE;
+    Double[] SAT_LAT;
+    Double[] SAT_LNG;
+    Double[] SAT_ALT;
+    ObjectAnimator moveX;
+    ObjectAnimator moveY;
 //    ObjectAnimator moveX1;
 //
 //    ObjectAnimator moveY1;
@@ -54,8 +65,9 @@ public class MainActivity extends Activity {
     //    android.hardware.Camera camera;
 //    FrameLayout frameLayout;
 //    ShowCamera showCamera;
-//    ImageView imageView;
+    ImageView imageView;
 
+    Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,18 +75,22 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        Button button = findViewById(R.id.button);
 //        frameLayout = findViewById(R.id.frame_layout_camera);
-//        imageView = findViewById(R.id.iv_photo);
+        imageView = findViewById(R.id.iv_photo);
 //
 //        camera = android.hardware.Camera.open();
 //        showCamera = new ShowCamera(this, camera);
 //        frameLayout.addView(showCamera);
-        JSON_Response_Method();
-        recyclerView = findViewById(R.id._rv_id);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // recyclerView = findViewById(R.id._rv_id);
+        //  recyclerView.setHasFixedSize(true);
+        //  recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        button.setOnClickListener(this);
     }
+
+
 //    private void StartA() {
 //        Animation animation = AnimationUtils.loadAnimation(this, R.anim.animation);
 //        textView.startAnimation(animation);
@@ -87,10 +103,6 @@ public class MainActivity extends Activity {
             @SuppressLint("NewApi")
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-
-                Log.e("1", "onResponse: " + response.code());
-                Log.e("2", "onResponse: " + response.isSuccessful());
-                Log.e("3", "onResponse: " + response.body());
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         String C = response.body().getInfo().getCategory();
@@ -99,19 +111,27 @@ public class MainActivity extends Activity {
 
                         Toast.makeText(getApplicationContext(), C + "--" + T + "--" + S, Toast.LENGTH_SHORT).show();
                         if (response.body() != null) {
-
                             for (Above above : response.body().getAbove()) {
                                 above.getSatid();
                                 above.getSatname();
                                 above.getIntDesignator();
                                 above.getLaunchDate();
-                                above.getSatlng();
                                 above.getSatlat();
+                                above.getSatlng();
                                 above.getSatalt();
-                                aboveList.add(above);
+
+                                if (above.getSatid() == 25077) {
+                                    Animation_Movement(above.getSatlat(), above.getSatlng());
+
+                                    Toast.makeText(getApplicationContext(), above.getSatlat() + "--" + above.getSatlng(), Toast.LENGTH_SHORT).show();
+                                    break;
+                                } else {
+                                    continue;
+                                }
                             }
-                            adapter = new AdapterClass(aboveList);
-                            recyclerView.setAdapter(adapter);
+
+                            //  adapter = new AdapterClass(aboveList);
+                            // recyclerView.setAdapter(adapter);
 //                            for (int i = 0; i < response.body().getAbove().size(); i++) {
 //
 //                                ID[i] = response.body().getAbove().get(i).getSatid();
@@ -121,7 +141,17 @@ public class MainActivity extends Activity {
 //                                SAT_LAT[i] = response.body().getAbove().get(i).getSatlat();
 //                                SAT_LNG[i] = response.body().getAbove().get(i).getSatlng();
 //                                SAT_ALT[i] = response.body().getAbove().get(i).getSatalt();
+//                                if (SAT_LAT[i] == 1 && SAT_LNG[i] == 1) {
+//                                    //  Animation_Movement(SAT_LAT[i], SAT_LNG[i]);
+//
+//                                    Toast.makeText(getApplicationContext(), SAT_LAT[i] + "--" + SAT_LNG[i], Toast.LENGTH_SHORT).show();
+//                                    break;
+//                                } else {
+//                                    continue;
+//                                }
 //                            }
+                            //  said(SAT_LAT[1], SAT_LNG[1]);
+
                         }
                     } else {
                         Log.e("dekha jak", "onResponse: " + response.body().getError());
@@ -137,7 +167,13 @@ public class MainActivity extends Activity {
         });
     }
 
-    public void said() {
+
+    public void Animation_Movement(double lat, double lng) {
+
+
+        SpringAnimation springAnimation
+                = new SpringAnimation(imageView, DynamicAnimation.X);
+
 
 //        float x = (float) Sat_Lan;
 //        float y = (float) Sat_Lan;
@@ -153,15 +189,19 @@ public class MainActivity extends Activity {
 //            objectAnimator.start();
 
 
-//        moveX = ObjectAnimator.ofFloat(imageView, "translationX", (float) Sat_Lat, (float) Sat_Lan);
-//        moveY = ObjectAnimator.ofFloat(imageView, "translationY", (float) Sat_Lan, (float) Sat_Lat);
+        moveX = ObjectAnimator.ofFloat(imageView, "translationX", (float) lat, (float) lng);
+        moveY = ObjectAnimator.ofFloat(imageView, "translationY", (float) lng, (float) lat);
         // moveX1 = ObjectAnimator.ofFloat(imageView, "translationX", (float) Sat_Lat, (float) -Sat_Lan);
         // moveY1 = ObjectAnimator.ofFloat(imageView, "translationY", (float) Sat_Lat, (float) -Sat_Lan);
-//        AnimatorSet set = new AnimatorSet();
-//        set.playTogether(moveX, moveY);
-//        downIt.setDuration(2500);
-//        downIt.setRepeatCount(ValueAnimator.INFINITE);
-//        downIt.setRepeatMode(ValueAnimator.RESTART);
-//        set.start();
+        AnimatorSet set = new AnimatorSet();
+        set.playTogether(moveX, moveY);
+        //set.playTogether(moveY);
+        set.setDuration(1000000);
+        set.start();
+    }
+
+    @Override
+    public void onClick(View v) {
+        JSON_Response_Method();
     }
 }

@@ -1,11 +1,13 @@
 package com.example.internship.mypersonalcamera;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,36 +48,49 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.ViewHolder> 
     }
 
     public class ViewHolder extends AdapterViewHolder {
-        final TextView _sat_Id;
-        final TextView _sat_Name;
-        final TextView _ini_Designator;
-        final TextView _launch_Date;
-        final TextView _sat_lat;
-        final TextView _sat_Lng;
-        final TextView _sat_alt;
+
+
+//        final TextView _sat_Id;
+//        final TextView _sat_Name;
+//        final TextView _ini_Designator;
+//        final TextView _launch_Date;
+//        final TextView _sat_lat;
+//        final TextView _sat_Lng;
+//        final TextView _sat_alt;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            _sat_Id = itemView.findViewById(R.id.tv_sat_id);
-            _sat_Name = itemView.findViewById(R.id.tv_sat_name);
-            _ini_Designator = itemView.findViewById(R.id.tv_ini_designator);
-            _launch_Date = itemView.findViewById(R.id.tv_launch_date);
-            _sat_lat = itemView.findViewById(R.id.tv_sat_lat);
-            _sat_Lng = itemView.findViewById(R.id.tv_sat_lng);
-            _sat_alt = itemView.findViewById(R.id.tv_sat_alt);
+//            _sat_Id = itemView.findViewById(R.id.tv_sat_id);
+//            _sat_Name = itemView.findViewById(R.id.tv_sat_name);
+//            _ini_Designator = itemView.findViewById(R.id.tv_ini_designator);
+//            _launch_Date = itemView.findViewById(R.id.tv_launch_date);
+//            _sat_lat = itemView.findViewById(R.id.tv_sat_lat);
+//            _sat_Lng = itemView.findViewById(R.id.tv_sat_lng);
+//            _sat_alt = itemView.findViewById(R.id.tv_sat_alt);
         }
 
         public void onBind(int position) {
             try {
-                Above above = aboveArrayList.get(position);
-                _sat_Id.setText(above.getSatid());
-                _sat_Name.setText(above.getSatname());
-                _ini_Designator.setText(above.getIntDesignator());
-                _launch_Date.setText(above.getLaunchDate());
-                _sat_lat.setText(String.valueOf(above.getSatlat()));
-                _sat_Lng.setText(String.valueOf(above.getSatlng()));
-                _sat_alt.setText(String.valueOf(above.getSatlat()));
+                final Above above = aboveArrayList.get(position);
+
+//                ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 100);
+//                valueAnimator.setDuration(2000);
+//                valueAnimator.setInterpolator(new LinearInterpolator());
+//                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//                    @Override
+//                    public void onAnimationUpdate(ValueAnimator animation) {
+//                        animation.setFloatValues();
+//                    }
+//                });
+
+//                _sat_Id.setText(String.valueOf(above.getSatid()));
+//                _sat_Name.setText(String.valueOf(above.getSatname()));
+//                _ini_Designator.setText(String.valueOf(above.getIntDesignator()));
+//                _launch_Date.setText(String.valueOf(above.getLaunchDate()));
+//                _sat_lat.setText(String.valueOf(above.getSatlat()));
+//                _sat_Lng.setText(String.valueOf(above.getSatlng()));
+//                _sat_alt.setText(String.valueOf(above.getSatlat()));
 
             } catch (Exception e) {
             }
