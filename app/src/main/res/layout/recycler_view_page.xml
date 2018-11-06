@@ -1,87 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        tools:ignore="RtlCompat">
-
-        <TextView
-            android:id="@+id/tv_sat_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="14dp"
-            android:text="Id"
-            tools:ignore="RtlCompat" />
-
-        <TextView
-            android:id="@+id/tv_sat_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/tv_sat_id"
-            android:layout_marginStart="109dp"
-            android:text="Name"
-            tools:ignore="RtlCompat" />
-
-
-
-        <TextView
-            android:id="@+id/tv_launch_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/tv_sat_id"
-            android:layout_marginEnd="13dp"
-            android:text="Launch Date"
-            tools:ignore="RtlCompat" />
-
-        <TextView
-            android:id="@+id/tv_sat_lat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="117dp"
-            android:layout_marginTop="60dp"
-            android:text="Lat"
-            tools:ignore="RtlCompat" />
-
-        <TextView
-            android:id="@+id/tv_sat_lng"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/tv_sat_lat"
-            android:layout_marginEnd="153dp"
-            android:text="Lng"
-            tools:ignore="RtlCompat" />
-
-        <TextView
-            android:id="@+id/tv_sat_alt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/tv_sat_lat"
-            android:layout_marginEnd="41dp"
-            android:text="Alt"
-            tools:ignore="RtlCompat" />
-
-        <TextView
-            android:id="@+id/tv_ini_designator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/tv_sat_id"
-            android:layout_marginEnd="135dp"
-            android:text="Designator" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_animation"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@color/colorPrimary"
+            android:visibility="visible"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
     </RelativeLayout>
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--tools:ignore="RtlCompat">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_sat_id"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_marginStart="47dp"-->
+            <!--android:layout_marginTop="14dp"-->
+            <!--android:text="Id"-->
+            <!--tools:ignore="RtlCompat" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_sat_name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignTop="@+id/tv_sat_id"-->
+            <!--android:layout_marginStart="109dp"-->
+            <!--android:text="Name"-->
+            <!--tools:ignore="RtlCompat" />-->
+
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_launch_date"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignTop="@+id/tv_sat_id"-->
+            <!--android:layout_marginEnd="13dp"-->
+            <!--android:text="Launch Date"-->
+            <!--tools:ignore="RtlCompat" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_sat_lat"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_marginStart="117dp"-->
+            <!--android:layout_marginTop="60dp"-->
+            <!--android:text="Lat"-->
+            <!--tools:ignore="RtlCompat" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_sat_lng"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignTop="@+id/tv_sat_lat"-->
+            <!--android:layout_marginEnd="153dp"-->
+            <!--android:text="Lng"-->
+            <!--tools:ignore="RtlCompat" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_sat_alt"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignTop="@+id/tv_sat_lat"-->
+            <!--android:layout_marginEnd="41dp"-->
+            <!--android:text="Alt"-->
+            <!--tools:ignore="RtlCompat" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_ini_designator"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignTop="@+id/tv_sat_id"-->
+            <!--android:layout_marginEnd="135dp"-->
+            <!--android:text="Designator" />-->
+    <!--</RelativeLayout>-->
 </RelativeLayout>

@@ -5,33 +5,21 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--<FrameLayout-->
-    <!--android:id="@+id/frame_layout_camera"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_alignParentTop="true">-->
+    <FrameLayout
+        android:id="@+id/frame_layout_camera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true">
 
 
-    <!--</FrameLayout>-->
+    </FrameLayout>
 
-    <!--<FrameLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:background="#00000000">-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000">
 
-    <ImageView
-        android:id="@+id/iv_photo"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/button"
-        android:layout_gravity="center"
-        android:layout_marginTop="209dp"
-        android:src="@color/colorPrimary"
-        android:visibility="visible"
-        tools:ignore="RtlCompat"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
-    <!--</FrameLayout>-->
+    </FrameLayout>
 
 
     <!--<android.support.v7.widget.RecyclerView-->
@@ -49,4 +37,14 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="Button" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="60dp"
+        android:text="Button"
+        tools:ignore="RtlCompat" />
 </RelativeLayout>

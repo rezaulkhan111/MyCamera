@@ -1,12 +1,17 @@
 package com.example.internship.mypersonalcamera;
 
+import android.Manifest;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Path;
 import android.hardware.camera2.CameraManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,10 +19,14 @@ import android.support.animation.DynamicAnimation;
 import android.support.animation.FlingAnimation;
 import android.support.animation.SpringAnimation;
 import android.support.animation.SpringForce;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -38,29 +47,19 @@ import java.util.jar.Attributes;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity {
     String authorization_Key = "&apiKey=53VELF-92F346-8HGD75-3IPC";
-    double observer_lat = 41.702f;
-    double observer_lng = -76.014f;
+    double observer_lat;
+    double observer_lng;
     double observer_alt = 0;
     int search_radius90 = 90;
     int category_id = 15;
     private AdapterClass adapter;
     ArrayList<Above> aboveList = new ArrayList<>();
-    RecyclerView recyclerView;
+//    RecyclerView recyclerView;
 
-    int[] ID;
-    String[] NAME;
-    String[] INT_DESIGNATOR;
-    String[] LAUNCH_DATE;
-    Double[] SAT_LAT;
-    Double[] SAT_LNG;
-    Double[] SAT_ALT;
     ObjectAnimator moveX;
     ObjectAnimator moveY;
-//    ObjectAnimator moveX1;
-//
-//    ObjectAnimator moveY1;
 
     //    android.hardware.Camera camera;
 //    FrameLayout frameLayout;
@@ -68,6 +67,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     ImageView imageView;
 
     Handler handler = new Handler();
+    Button button3, button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        Button button = findViewById(R.id.button);
+        button = findViewById(R.id.button);
+        button3 = findViewById(R.id.button3);
 //        frameLayout = findViewById(R.id.frame_layout_camera);
         imageView = findViewById(R.id.iv_photo);
 //
@@ -83,14 +84,26 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //        showCamera = new ShowCamera(this, camera);
 //        frameLayout.addView(showCamera);
 
-        // recyclerView = findViewById(R.id._rv_id);
-        //  recyclerView.setHasFixedSize(true);
-        //  recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView = findViewById(R.id._rv_id);
+//        recyclerView.setHasFixedSize(true);
 
-        button.setOnClickListener(this);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JSON_Response_Method();
+            }
+        });
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                @SuppressLint("MissingPermission") Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                observer_lat = location.getLatitude();
+                observer_lng = location.getLongitude();
+            }
+        });
     }
-
-
 //    private void StartA() {
 //        Animation animation = AnimationUtils.loadAnimation(this, R.anim.animation);
 //        textView.startAnimation(animation);
@@ -119,19 +132,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                                 above.getSatlat();
                                 above.getSatlng();
                                 above.getSatalt();
-
-                                if (above.getSatid() == 25077) {
-                                    Animation_Movement(above.getSatlat(), above.getSatlng());
-
-                                    Toast.makeText(getApplicationContext(), above.getSatlat() + "--" + above.getSatlng(), Toast.LENGTH_SHORT).show();
-                                    break;
-                                } else {
-                                    continue;
-                                }
+                                Animation_Movement(above.getSatlat(), above.getSatlng());
                             }
-
-                            //  adapter = new AdapterClass(aboveList);
-                            // recyclerView.setAdapter(adapter);
+                            // Get_Adapter_List(aboveList);
 //                            for (int i = 0; i < response.body().getAbove().size(); i++) {
 //
 //                                ID[i] = response.body().getAbove().get(i).getSatid();
@@ -151,7 +154,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //                                }
 //                            }
                             //  said(SAT_LAT[1], SAT_LNG[1]);
-
                         }
                     } else {
                         Log.e("dekha jak", "onResponse: " + response.body().getError());
@@ -167,41 +169,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
         });
     }
 
+    private void Get_Adapter_List(ArrayList<Above> aboveList) {
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+//        adapter.getItemId(1);
+//        adapter = new AdapterClass(aboveList);
+//        recyclerView.setAdapter(adapter);
+    }
 
     public void Animation_Movement(double lat, double lng) {
-
-
-        SpringAnimation springAnimation
-                = new SpringAnimation(imageView, DynamicAnimation.X);
-
-
-//        float x = (float) Sat_Lan;
-//        float y = (float) Sat_Lan;
-//        android.graphics.Path path = new android.graphics.Path();
-//        path.moveTo(x + 0, y + 0);
-//        path.lineTo(x + 100, y + 150);
-//        path.lineTo(x + 400, y + 150);
-//        path.lineTo(x + 0, y + 0);
-//
-//
-//            @SuppressLint({"NewApi", "LocalSuppress"}) ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
-//            objectAnimator.setDuration(3000);
-//            objectAnimator.start();
-
-
         moveX = ObjectAnimator.ofFloat(imageView, "translationX", (float) lat, (float) lng);
-        moveY = ObjectAnimator.ofFloat(imageView, "translationY", (float) lng, (float) lat);
-        // moveX1 = ObjectAnimator.ofFloat(imageView, "translationX", (float) Sat_Lat, (float) -Sat_Lan);
-        // moveY1 = ObjectAnimator.ofFloat(imageView, "translationY", (float) Sat_Lat, (float) -Sat_Lan);
+        moveY = ObjectAnimator.ofFloat(imageView, "translationY", (float) lat, (float) lng);
         AnimatorSet set = new AnimatorSet();
-        set.playTogether(moveX, moveY);
-        //set.playTogether(moveY);
-        set.setDuration(1000000);
+        set.play(moveX);
+        // set.setDuration(180000);
         set.start();
     }
 
-    @Override
-    public void onClick(View v) {
-        JSON_Response_Method();
-    }
 }

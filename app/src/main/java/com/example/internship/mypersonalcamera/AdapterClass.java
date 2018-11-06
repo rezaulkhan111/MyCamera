@@ -49,6 +49,7 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.ViewHolder> 
 
     public class ViewHolder extends AdapterViewHolder {
 
+        final ImageView imageView;
 
 //        final TextView _sat_Id;
 //        final TextView _sat_Name;
@@ -61,6 +62,7 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            imageView = itemView.findViewById(R.id.iv_photo);
 //            _sat_Id = itemView.findViewById(R.id.tv_sat_id);
 //            _sat_Name = itemView.findViewById(R.id.tv_sat_name);
 //            _ini_Designator = itemView.findViewById(R.id.tv_ini_designator);
@@ -74,16 +76,8 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.ViewHolder> 
             try {
                 final Above above = aboveArrayList.get(position);
 
-//                ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 100);
-//                valueAnimator.setDuration(2000);
-//                valueAnimator.setInterpolator(new LinearInterpolator());
-//                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//                    @Override
-//                    public void onAnimationUpdate(ValueAnimator animation) {
-//                        animation.setFloatValues();
-//                    }
-//                });
-
+                //  imageView.setAnimation(R.id.iv_animation);
+                //  imageView.an
 //                _sat_Id.setText(String.valueOf(above.getSatid()));
 //                _sat_Name.setText(String.valueOf(above.getSatname()));
 //                _ini_Designator.setText(String.valueOf(above.getIntDesignator()));
