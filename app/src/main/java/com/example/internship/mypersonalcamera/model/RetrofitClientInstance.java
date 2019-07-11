@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClientInstance {
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://www.n2yo.com/rest/v1/satellite/";
+    private static final String BASE_URL = "";
 
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {

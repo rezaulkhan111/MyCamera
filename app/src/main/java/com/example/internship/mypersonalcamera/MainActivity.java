@@ -48,7 +48,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class MainActivity extends Activity {
-    String authorization_Key = "&apiKey=53VELF-92F346-8HGD75-3IPC";
+    String authorization_Key = "";
     double observer_lat;
     double observer_lng;
     double observer_alt = 0;
@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
         button = findViewById(R.id.button);
         button3 = findViewById(R.id.button3);
 //        frameLayout = findViewById(R.id.frame_layout_camera);
-        imageView = findViewById(R.id.iv_photo);
+//        imageView = findViewById(R.id.iv_photo);
 //
 //        camera = android.hardware.Camera.open();
 //        showCamera = new ShowCamera(this, camera);

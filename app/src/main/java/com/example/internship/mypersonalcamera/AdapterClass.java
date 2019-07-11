@@ -49,7 +49,7 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.ViewHolder> 
 
     public class ViewHolder extends AdapterViewHolder {
 
-        final ImageView imageView;
+//        final ImageView imageView;
 
 //        final TextView _sat_Id;
 //        final TextView _sat_Name;
@@ -62,7 +62,7 @@ public class AdapterClass extends RecyclerView.Adapter<AdapterClass.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.iv_photo);
+//            imageView = itemView.findViewById(R.id.iv_photo);
 //            _sat_Id = itemView.findViewById(R.id.tv_sat_id);
 //            _sat_Name = itemView.findViewById(R.id.tv_sat_name);
 //            _ini_Designator = itemView.findViewById(R.id.tv_ini_designator);
